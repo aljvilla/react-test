@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import React from 'react';
+import React, { Fragment } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
 
@@ -40,7 +40,7 @@ const WeatherMap = (props) => {
       setShowErrorWin({ show: true, message: 'Something went wrong' });
       setTimeout(() => {
         setShowErrorWin({ show: false, message: null });
-      }, 2000);
+      }, 5000);
     }
   }
   return <div style={{ width: '100%', height: '100vh' }}>
@@ -48,11 +48,13 @@ const WeatherMap = (props) => {
       bootstrapURLKeys={{ key: String(GOOGLE_MAPS_API_KEY) }}
       center={mapConfig.center}
       defaultZoom={mapConfig.zoom}
-      options={{ zoomControl: false, disableDoubleClickZoom: true, maxZoom: mapConfig.zoom, minZoom: mapConfig.zoom }}
+      // options={{ zoomControl: false, disableDoubleClickZoom: true, maxZoom: mapConfig.zoom, minZoom: mapConfig.zoom }}
       onClick={({ lat, lng }) => getWeatherInfo({ lat, lng })}
     >
-      {showInfoWin.show && <InfoWindow lat={showInfoWin.lat} lng={showInfoWin.lng} />}
-      {showErrorWin.show && <ErrorWindow lat={showInfoWin.lat} lng={showInfoWin.lng} />}
+      <Fragment>
+        {showInfoWin.show && <InfoWindow lat={showInfoWin.lat} lng={showInfoWin.lng} />}
+        {showErrorWin.show && <ErrorWindow lat={showInfoWin.lat} lng={showInfoWin.lng} />}
+      </Fragment>
     </GoogleMapReact>
   </div>;
 }

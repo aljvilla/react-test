@@ -1,22 +1,10 @@
 import React from 'react';
-import { WiRain, WiNightClear, WiNightAltPartlyCloudy, WiDaySunny, WiCloudy } from "weather-icons-react";
 
 import WrapperConsumer from '../store';
 
-const getIcon = (icon) => {
-  switch (icon) {
-    case 'rain': return <WiRain size={30} color='#fff' />
-    case 'clear-night': return <WiNightClear size={30} color='#fff' />;
-    case 'partly-cloudy-night': return <WiNightAltPartlyCloudy size={30} color='#fff' />;
-    case 'cloudy': return <WiCloudy size={30} color='#fff' />;
-    default:
-      return <WiDaySunny size={30} color='#fff' />;
-  }
-}
-
 const ErrorWindow = ({ context }) => {
   const { showErrorWin: { message } } = context;
-  return <div className="aqui" style={{
+  return <div style={{
     color: 'white',
     padding: '15px 10px',
     display: 'inline-flex',
@@ -29,13 +17,9 @@ const ErrorWindow = ({ context }) => {
     transform: 'translate(-50%, -50%)'
   }}>
     <table style={{ width: '100%', border: 0 }}>
-      <tr>
+      <tr key="0">
         <td>
           <h1>Oops!</h1>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <b>{message}</b>
         </td>
       </tr>

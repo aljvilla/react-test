@@ -1,5 +1,6 @@
 import React from 'react';
 import { WiRain, WiNightClear, WiNightAltPartlyCloudy, WiDaySunny, WiCloudy } from "weather-icons-react";
+import moment from 'moment';
 
 import WrapperConsumer from '../store';
 
@@ -16,7 +17,7 @@ const getIcon = (icon) => {
 
 const InfoWindow = ({ context }) => {
   const { showInfoWin: { countryName, weatherInfo } } = context;
-  return <div className="aqui" style={{
+  return <div style={{
     color: 'white',
     padding: '15px 10px',
     display: 'inline-flex',
@@ -29,26 +30,33 @@ const InfoWindow = ({ context }) => {
     transform: 'translate(-50%, -50%)'
   }}>
     <table style={{ width: '100%', border: 0 }}>
-      <tr>
-        <td>
-          <h1>{countryName}</h1>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          {getIcon(weatherInfo.icon)}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>{weatherInfo.temperature}°F</b>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Cached: {weatherInfo.cached ? 'Yes' : 'No'}</b>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>
+            <h1>{countryName}</h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>{moment.unix(weatherInfo.time).format('DD/MM/YYYY HH:mm')}</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {getIcon(weatherInfo.icon)}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>{weatherInfo.temperature}°F</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Cached: {weatherInfo.cached ? 'Yes' : 'No'}</b>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 };
